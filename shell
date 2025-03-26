@@ -1,0 +1,78 @@
+#!/bin/bash
+
+## CONFIGURATION
+# CHANGE THESE VALUES FOR YOUR PROJECT
+
+# ex: COMPOSE_PROJECT=shopfloorio-customername
+COMPOSE_PROJECT=shopfloorio
+COMPOSE_FILES=(
+  "docker-compose.shell.yml"
+)
+
+## END CONFIGURATION
+
+export COMPOSE_PROJECT_NAME="${COMPOSE_PROJECT}"
+
+SHELL_CONTAINER_NAME="${COMPOSE_PROJECT}-app"
+FILE_ARGS=()
+for FILE in "${COMPOSE_FILES[@]}"; do
+  FILE_ARGS+=(-f "${FILE}")
+done
+
+case "$1" in
+    # not an official command, but makes this file easier to read. Called by running the script with no command.
+    start)
+      case "$2" in
+        ""|shell)
+          docker compose "${FILE_ARGS[@]}" build \
+          && docker compose "${FILE_ARGS[@]}" run \
+                  --name="${SHELL_CONTAINER_NAME}" \
+                  --rm \
+                  -u 1000 \
+                  --service-ports \
+                  app \
+                  bash \
+                  || true \
+          && echo Stopping environment... \
+          && ./shell stop
+          ;;
+        no-shell)
+          docker compose "${FILE_ARGS[@]}" build \
+          && docker compose "${FILE_ARGS[@]}" run \
+                  --name="${SHELL_CONTAINER_NAME}" \
+                  --rm \
+                  -d \
+                  -it \
+                  app \
+                  exit \
+          && echo Started enviroment ...
+          ;;
+        *)
+          echo "Unknown command."
+          ;;
+      esac
+      ;;
+
+    build)
+      docker compose "${FILE_ARGS[@]}" build --no-cache
+      ;;
+
+    pull)
+      docker compose "${FILE_ARGS[@]}" pull --ignore-pull-failures
+      ;;
+
+    join)
+      docker exec -it "${SHELL_CONTAINER_NAME}" bash
+      ;;
+
+    # This sequence deletes anonymous volumes, which a pure "down" does not.
+    stop)
+      docker compose "${FILE_ARGS[@]}" stop \
+      && docker compose "${FILE_ARGS[@]}" rm -v -f \
+      && docker compose "${FILE_ARGS[@]}" down
+      ;;
+
+    *)
+      ./shell start no-shell
+      ;;
+esac

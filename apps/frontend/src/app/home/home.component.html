@@ -1,0 +1,12 @@
+<div class="container">
+  <p-card header="Challenge 1: PrimeNG Components with API Data">
+    <div class="message-container">
+      <p-message *ngIf="message" severity="info" [text]="message"></p-message>
+    </div>
+    
+    <div class="list-container">
+      <h3>Items from API:</h3>
+      <p-listbox [options]="items"></p-listbox>
+    </div>
+  </p-card>
+</div> 

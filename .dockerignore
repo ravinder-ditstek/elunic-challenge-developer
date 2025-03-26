@@ -1,0 +1,36 @@
+.env
+
+.vscode
+nbproject
+.idea
+
+**/node_modules
+node_modules
+
+_k8s-deployment
+
+**/temp
+temp
+
+.angular
+.nx
+
+docs/build
+docs/.cache-loader
+
+_local
+
+# Prevent changes to Dockerfile from invalidating the cache
+Dockerfile
+**/Dockerfile
+
+# Ignore .dockerignore file itself
+.dockerignore
+
+.gitlab-ci.yml
+**/.gitlab-ci.yml
+
+docker-compose.shell-auth.yml
+docker-compose.shell.yml
+
+shell
