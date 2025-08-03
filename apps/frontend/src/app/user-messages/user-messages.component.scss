@@ -1,0 +1,91 @@
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.mb-4 {
+  margin-bottom: 1rem;
+}
+
+.mt-4 {
+  margin-top: 1rem;
+}
+
+.flex {
+  display: flex;
+}
+
+.flex-1 {
+  flex: 1;
+}
+
+.flex-shrink-0 {
+  flex-shrink: 0;
+}
+
+.gap-3 {
+  gap: 0.75rem;
+}
+
+.align-items-center {
+  align-items: center;
+}
+
+.justify-content-between {
+  justify-content: space-between;
+}
+
+.w-full {
+  width: 100%;
+}
+
+.block {
+  display: block;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-sm {
+  font-size: 0.875rem;
+}
+
+.text-gray-600 {
+  color: #6b7280;
+}
+
+.font-semibold {
+  font-weight: 600;
+}
+
+.p-4 {
+  padding: 1rem;
+}
+
+// PrimeNG table styling
+:host ::ng-deep .p-datatable-sm .p-datatable-thead > tr > th {
+  padding: 0.5rem;
+  font-size: 0.875rem;
+}
+
+:host ::ng-deep .p-datatable-sm .p-datatable-tbody > tr > td {
+  padding: 0.5rem;
+  font-size: 0.875rem;
+}
+
+// Responsive design
+@media (max-width: 768px) {
+  .container {
+    padding: 10px;
+  }
+  
+  .flex {
+    flex-direction: column;
+  }
+  
+  .gap-3 {
+    gap: 0.5rem;
+  }
+} 

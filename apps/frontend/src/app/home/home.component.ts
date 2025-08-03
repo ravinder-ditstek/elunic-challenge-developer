@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
+import { RouterModule } from '@angular/router';
 import { MessageModule } from 'primeng/message';
 import { ListboxModule } from 'primeng/listbox';
 import { CardModule } from 'primeng/card';
+import { ButtonModule } from 'primeng/button';
 
 interface ApiResponse {
   message: string;
@@ -13,7 +15,7 @@ interface ApiResponse {
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, MessageModule, ListboxModule, CardModule],
+  imports: [CommonModule, RouterModule, MessageModule, ListboxModule, CardModule, ButtonModule],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
